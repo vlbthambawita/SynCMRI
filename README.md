@@ -333,7 +333,15 @@ https://huggingface.co/spaces/ishanthathsara/SynCMRIApp
 
 ### Pretrained Models 
 
+```bash
+https://huggingface.co/SEARCH-IHI/DeepFakeCMRI
+```
 
+### Synthetic Dataset
+
+```bash
+https://huggingface.co/datasets/SEARCH-IHI/DeepFakeCMRI
+```
 
 ---
 
