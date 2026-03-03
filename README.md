@@ -323,6 +323,19 @@ python main.py
 - **Synthetic data**: PNG images and masks; class remapping to MandM scheme in `synthetic_dataloader.py`.
 
 ---
+## Hugging Face Resources
+
+### Interactive Visualization 
+
+```bash
+https://huggingface.co/spaces/ishanthathsara/SynCMRIApp
+```
+
+### Pretrained Models 
+
+
+
+---
 
 ## Citation
 
