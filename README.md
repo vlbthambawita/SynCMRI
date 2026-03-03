@@ -64,6 +64,17 @@ SynCMRI/
 │   ├── test.py                         # LDM inference
 │   ├── eval.py                         # load_models, generate_samples
 │   └── fidelity_evaluation.py          # Fidelity metrics for LDM
+├── flow-matching/                      # Flow Matching generative model
+│   └── src/
+│       ├── data/                       # Data loading
+│       ├── models/                     # Flow matching model architectures
+│       └── utils/                      # Helper functions
+├── mask_generation/                    # Synthetic mask generation pipeline
+│   ├── main.py                         # Entry point for mask generation
+│   ├── generate.py                     # Mask synthesis logic
+│   ├── evaluate.py                     # Mask evaluation metrics
+│   ├── fidelity_evaluation.py          # Pair-wise Dice, mask-level metrics
+│   └── data_loading.py                 # Mask dataset loading
 ├── segmentation_model/                 # Downstream utility evaluation
 │   ├── train.py                        # Train DynUNet2D on real/synthetic data
 │   ├── test.py                         # Evaluate on MandM & ACDC
@@ -149,6 +160,8 @@ Set the cache root in the relevant config files:
 
 - **DDPM**: `diffusion_DDPM/data_loader.py` → `CACHE_DIR`
 - **LDM**: `diffusion_LDM/config.py` → `train_params['cache_root_mandm']`
+- **FM**: `flow-matching/src/data/mandm_dataloader.py` → `cache_root`
+- **Mask Generation**: `mask_generation/data_loading.py` → `cache_dir`
 - **Segmentation**: `segmentation_model/train.py` → `TrainConfig.cache_root`
 - **Privacy**: `privacy_evaluation/synthetic_image_privacy/stage_2/config.py` → `paths['cache_dir']`
 
