@@ -15,20 +15,15 @@ from tqdm import tqdm
 from monai.losses.dice import DiceCELoss
 from monai.metrics import DiceMetric,MeanIoU,HausdorffDistanceMetric,SurfaceDistanceMetric
 
-# from src.data.mandm_dataloader import MandMDatasetConfig,LoaderConfig,build_mandm_loaders
-# from src.data.acdc_dataloader import ACDCDatasetConfig,LoaderConfig,build_acdc_loaders
+# Use the relevent dataloaders
 from src.data.synthetic_dataloader import SyntheticDatasetConfig,LoaderConfig,build_syn_loaders
 from src.models.dynunet2d import build_dynunet2d
 
 @dataclass
 class TrainConfig:
-    # data
-    # dataset_name: str = "mandm"
-    # cache_root: str = "/scratch1/e20-fyp-syn-car-mri-gen/datasets/MandM Dataset/cache"
-    # dataset_name: str = "acdc"
-    # cache_root: str = "/scratch1/e20-fyp-syn-car-mri-gen/datasets/ACDC Dataset/cache"
-    dataset_name: str = "syn_fm_full"
-    cache_root: str = "/scratch1/e20-fyp-syn-car-mri-gen/flow-matching/generated/synthetic_imgs/20260214_1240"
+    # Data
+    dataset_name: str = "dataset_name" # Rename
+    cache_root: str = "dataset_path"    # Rename
     crop_size: int = 128
 
     # training
@@ -40,7 +35,7 @@ class TrainConfig:
     use_amp: bool = True
 
     # outputs
-    base_out_dir: str = "/scratch1/e20-fyp-syn-car-mri-gen/segmentation-v2/outputs"
+    base_out_dir: str = "output_dir"    # Rename
     save_images_every: int = 10
 
 def make_run_dir(base_out: str, dataset_name: str) -> str:
@@ -249,15 +244,7 @@ def main():
     best_ckpt_path = os.path.join(run_dir, "checkpoints", "best.pt")
     print("RUN DIR:", run_dir)
 
-    # Data
-    # dc = MandMDatasetConfig(cache_root=cfg.cache_root, crop_size=cfg.crop_size)
-    # lc = LoaderConfig(batch_size=cfg.batch_size, num_workers=cfg.num_workers)
-    # train_loader, val_loader, test_loader, stats = build_mandm_loaders(cfg.cache_root, dc=dc, lc=lc)
-
-    # dc = ACDCDatasetConfig(cache_root=cfg.cache_root, crop_size=cfg.crop_size)
-    # lc = LoaderConfig(batch_size=cfg.batch_size, num_workers=cfg.num_workers)
-    # train_loader, val_loader, test_loader, stats = build_acdc_loaders(cfg.cache_root, dc=dc, lc=lc)
-
+    # Relevent Configurations
     dc = SyntheticDatasetConfig()
     lc = LoaderConfig(batch_size=cfg.batch_size, num_workers=cfg.num_workers)
     train_loader, val_loader, stats = build_syn_loaders(cfg.cache_root, dc=dc, lc=lc)
